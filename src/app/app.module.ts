@@ -6,11 +6,13 @@ import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { PoorEnemyDashboardComponent } from './poor-enemy-dashboard/poor-enemy-dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent
+    DashboardComponent,
+    PoorEnemyDashboardComponent
   ],
   imports: [
     BrowserModule,
