@@ -43,4 +43,12 @@ describe('PoorEnemyDashboardComponent', () => {
     expect(service.getRepo).not.toHaveBeenCalled();
   });
 
+  it('should not get repo detail from github service when only owner input change', () => {
+    spyOn(service, 'getRepo');
+    component.ngOnChanges({
+      owner: new SimpleChange('', 'angular'),
+    });
+    expect(service.getRepo).not.toHaveBeenCalled();
+  });
+
 });
