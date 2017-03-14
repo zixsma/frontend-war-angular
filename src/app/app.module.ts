@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PoorEnemyDashboardComponent } from './poor-enemy-dashboard/poor-enemy-dashboard.component';
+import { GithubService } from './github-service/github.service';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import { PoorEnemyDashboardComponent } from './poor-enemy-dashboard/poor-enemy-d
     HttpModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [GithubService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

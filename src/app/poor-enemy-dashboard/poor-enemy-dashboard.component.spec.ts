@@ -1,14 +1,19 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
+import { SimpleChange } from '@angular/core';
 import { PoorEnemyDashboardComponent } from './poor-enemy-dashboard.component';
+import { GithubService } from '../github-service/github.service';
+import { HttpModule } from '@angular/http';
 
-xdescribe('PoorEnemyDashboardComponent', () => {
+describe('PoorEnemyDashboardComponent', () => {
   let component: PoorEnemyDashboardComponent;
   let fixture: ComponentFixture<PoorEnemyDashboardComponent>;
+  let service: GithubService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PoorEnemyDashboardComponent ]
+      declarations: [ PoorEnemyDashboardComponent ],
+      providers: [ GithubService ],
+      imports: [ HttpModule ]
     })
     .compileComponents();
   }));
@@ -16,10 +21,20 @@ xdescribe('PoorEnemyDashboardComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(PoorEnemyDashboardComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    service = TestBed.get(GithubService);
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  
+  it('should get repo detail from github service when owner and repo input change', () => {
+    spyOn(service, 'getRepo');
+    component.ngOnChanges({
+      owner: new SimpleChange('', 'angular'),
+      repo: new SimpleChange('', 'angular')
+    });
+    expect(service.getRepo).toHaveBeenCalledWith('angular', 'angular');
+  });
+
 });
