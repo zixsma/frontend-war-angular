@@ -1,5 +1,5 @@
 import { Component, OnInit, OnChanges, SimpleChanges, Input } from '@angular/core';
-import { GithubService } from '../github-service/github.service';
+import { GithubService, RepoDetail } from '../github-service/github.service';
 
 @Component({
   selector: 'poor-enemy-dashboard',
@@ -9,14 +9,18 @@ import { GithubService } from '../github-service/github.service';
 export class PoorEnemyDashboardComponent implements OnInit, OnChanges {
   @Input() owner: string;
   @Input() repo: string;
+  repoDetail: RepoDetail;
+
   constructor(private githubService: GithubService) { }
 
   ngOnInit() {
+    this.repoDetail = new RepoDetail();
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['owner'] && changes['repo']) {
-      this.githubService.getRepo(changes['owner'].currentValue, changes['repo'].currentValue);
+      this.githubService.getRepo(changes['owner'].currentValue, changes['repo'].currentValue)
+        .subscribe(repoDetail => this.repoDetail = repoDetail);
     }
   }
 

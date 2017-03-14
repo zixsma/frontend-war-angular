@@ -1,8 +1,9 @@
 import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 import { SimpleChange } from '@angular/core';
 import { PoorEnemyDashboardComponent } from './poor-enemy-dashboard.component';
-import { GithubService } from '../github-service/github.service';
+import { GithubService, RepoDetail } from '../github-service/github.service';
 import { HttpModule } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
 
 describe('PoorEnemyDashboardComponent', () => {
   let component: PoorEnemyDashboardComponent;
@@ -11,11 +12,11 @@ describe('PoorEnemyDashboardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PoorEnemyDashboardComponent ],
-      providers: [ GithubService ],
-      imports: [ HttpModule ]
+      declarations: [PoorEnemyDashboardComponent],
+      providers: [GithubService],
+      imports: [HttpModule]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -27,14 +28,27 @@ describe('PoorEnemyDashboardComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  
-  it('should get repo detail from github service when owner and repo input change', () => {
-    spyOn(service, 'getRepo');
-    component.ngOnChanges({
-      owner: new SimpleChange('', 'angular'),
-      repo: new SimpleChange('', 'angular')
+
+  describe('owner and repo input change', () => {
+    let repoDetail: RepoDetail;
+    
+    beforeEach(() => {
+      repoDetail = getRepoDetail();
+      spyOn(service, 'getRepo').and.returnValue(new Observable(observer => observer.next(repoDetail)));
+      component.ngOnChanges({
+        owner: new SimpleChange('', 'angular'),
+        repo: new SimpleChange('', 'angular')
+      });
     });
-    expect(service.getRepo).toHaveBeenCalledWith('angular', 'angular');
+
+    it('should get repo detail from github service', () => {
+      expect(service.getRepo).toHaveBeenCalledWith('angular', 'angular');
+    });
+
+    it('should set repoDetail when get repo detail success', () => {
+      expect(component.repoDetail).toEqual(repoDetail);
+    });
+
   });
 
   it('should not get repo detail from github service when owner and repo input do not change', () => {
@@ -50,5 +64,15 @@ describe('PoorEnemyDashboardComponent', () => {
     });
     expect(service.getRepo).not.toHaveBeenCalled();
   });
+
+  function getRepoDetail(): RepoDetail {
+    return new RepoDetail({
+      name: "angular",
+      full_name: "angular/angular",
+      stargazers_count: 21676,
+      forks_count: 5568,
+      open_issues_count: 1233
+    });
+  }
 
 });

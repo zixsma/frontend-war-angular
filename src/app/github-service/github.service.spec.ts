@@ -1,9 +1,8 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { GithubService } from './github.service';
+import { GithubService, RepoDetail } from './github.service';
 import { Http, BaseRequestOptions, Response, ResponseOptions, RequestMethod } from '@angular/http';
 import { MockBackend } from '@angular/http/testing';
-import { RepoDetail } from './repo-detail';
 
 describe('GithubService', () => {
   let service: GithubService;

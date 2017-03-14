@@ -1,10 +1,10 @@
 <div class="card">
-  <h3 class="card-header">Polymer</h3>
+  <h3 class="card-header">{{repoDetail.name}}</h3>
   <div class="card-block">
-    <p class="card-text">Build modern apps using web components</p>
-    <p class="card-text">Stars: x</p>
-    <p class="card-text">Open Issues: x</p>
-    <p class="card-text">Forks: x</p>
+    <p class="card-text">{{repoDetail.fullName}}</p>
+    <p class="card-text">Stars: {{repoDetail.stargazersCount}}</p>
+    <p class="card-text">Open Issues: {{repoDetail.openIssuesCount}}</p>
+    <p class="card-text">Forks: {{repoDetail.forksCount}}</p>
     <p class="card-text">Pull Requests: x</p>
   </div>
   <div class="card-footer text-muted">
