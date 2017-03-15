@@ -17,8 +17,9 @@ export class GithubService {
       .map(response => new RepoDetail(response.json()));
   }
 
-  getPullRequest(fullRepoName: string): Observable<any> {
-    return this.http.get(`https://api.github.com/search/issues?q=+type:pr+repo:${fullRepoName}&sort=created&‌​order=asc`, { headers: GithubService.header });
+  getPullRequest(fullRepoName: string): Observable<number> {
+    return this.http.get(`https://api.github.com/search/issues?q=+type:pr+repo:${fullRepoName}&sort=created&‌​order=asc`, { headers: GithubService.header })
+      .map(prCount => prCount.json().total_count);
   }
 
 }

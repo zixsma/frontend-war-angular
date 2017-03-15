@@ -87,6 +87,12 @@ describe('GithubService', () => {
       service.getPullRequest('vuejs/vue-cli');
     });
 
+    it('should return pull request count when get pull request success', () => {
+      service.getPullRequest('vuejs/vue-cli').subscribe(count => {
+        expect(count).toEqual(5706);
+      });
+    });
+
     function getJsonPullRequest() {
       return { total_count: 5706 };
     }
