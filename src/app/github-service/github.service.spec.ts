@@ -56,4 +56,39 @@ describe('GithubService', () => {
       open_issues_count: 1233
     };
   });
+
+  describe('get pull request', () => {
+    beforeEach(() => {
+      mockBackend.connections.subscribe((connection) => {
+        connection.mockRespond(new Response(new ResponseOptions({
+          body: JSON.stringify(getJsonPullRequest())
+        })));
+      });
+    });
+
+    it('should call api issues with repo full name angular/angular', (done) => {
+      let header = new Headers();
+      header.append('Accept', 'application/vnd.github.v3+json');
+      mockBackend.connections.subscribe((connection) => {
+        expect(connection.request.url).toEqual('https://api.github.com/search/issues?q=+type:pr+repo:angular/angular&sort=created&‌​order=asc');
+        expect(connection.request.method).toEqual(RequestMethod.Get);
+        expect(connection.request.headers.toJSON()).toEqual(header.toJSON());
+        done();
+      });
+      service.getPullRequest('angular/angular');
+    });
+
+    it('should call api issues with repo full name vuejs/vue-cli', (done) => {
+      mockBackend.connections.subscribe((connection) => {
+        expect(connection.request.url).toEqual('https://api.github.com/search/issues?q=+type:pr+repo:vuejs/vue-cli&sort=created&‌​order=asc');
+        expect(connection.request.method).toEqual(RequestMethod.Get);
+        done();
+      });
+      service.getPullRequest('vuejs/vue-cli');
+    });
+
+    function getJsonPullRequest() {
+      return { total_count: 5706 };
+    }
+  });
 });
