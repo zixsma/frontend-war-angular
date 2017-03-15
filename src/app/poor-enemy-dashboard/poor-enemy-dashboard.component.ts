@@ -9,12 +9,11 @@ import { GithubService, RepoDetail } from '../github-service/github.service';
 export class PoorEnemyDashboardComponent implements OnInit, OnChanges {
   @Input() owner: string;
   @Input() repo: string;
-  repoDetail: RepoDetail;
+  repoDetail = new RepoDetail();
 
   constructor(private githubService: GithubService) { }
 
   ngOnInit() {
-    this.repoDetail = new RepoDetail();
   }
 
   ngOnChanges(changes: SimpleChanges) {

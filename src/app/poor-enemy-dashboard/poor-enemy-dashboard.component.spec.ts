@@ -29,9 +29,13 @@ describe('PoorEnemyDashboardComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should create new repoDetail', () => {
+    expect(component.repoDetail).toEqual(new RepoDetail());
+  });
+
   describe('owner and repo input change', () => {
     let repoDetail: RepoDetail;
-    
+
     beforeEach(() => {
       repoDetail = getRepoDetail();
       spyOn(service, 'getRepo').and.returnValue(new Observable(observer => observer.next(repoDetail)));
@@ -67,8 +71,8 @@ describe('PoorEnemyDashboardComponent', () => {
 
   function getRepoDetail(): RepoDetail {
     return new RepoDetail({
-      name: "angular",
-      full_name: "angular/angular",
+      name: 'angular',
+      description: 'One framework. Mobile & desktop.',
       stargazers_count: 21676,
       forks_count: 5568,
       open_issues_count: 1233

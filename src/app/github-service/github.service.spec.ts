@@ -1,7 +1,7 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { GithubService, RepoDetail } from './github.service';
-import { Http, BaseRequestOptions, Response, ResponseOptions, RequestMethod } from '@angular/http';
+import { Http, BaseRequestOptions, Response, ResponseOptions, RequestMethod, Headers } from '@angular/http';
 import { MockBackend } from '@angular/http/testing';
 
 describe('GithubService', () => {
@@ -24,9 +24,12 @@ describe('GithubService', () => {
     });
 
     it('should call api /repos/facebook/react when owner facebook and repo react', () => {
+      let header = new Headers();
+      header.append('Accept', 'application/vnd.github.v3+json');
       mockBackend.connections.subscribe((connection) => {
         expect(connection.request.url).toEqual('https://api.github.com/repos/facebook/react');
         expect(connection.request.method).toEqual(RequestMethod.Get);
+        expect(connection.request.headers.toJSON()).toEqual(header.toJSON());
       });
       service.getRepo('facebook', 'react');
     });
