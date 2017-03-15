@@ -19,7 +19,10 @@ export class PoorEnemyDashboardComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (changes['owner'] && changes['repo']) {
       this.githubService.getRepo(changes['owner'].currentValue, changes['repo'].currentValue)
-        .subscribe(repoDetail => this.repoDetail = repoDetail);
+        .subscribe(repoDetail => {
+          this.repoDetail = repoDetail;
+          this.githubService.getPullRequest(this.repoDetail.fullName);
+        });
     }
   }
 

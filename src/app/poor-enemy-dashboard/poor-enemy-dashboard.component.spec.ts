@@ -39,6 +39,7 @@ describe('PoorEnemyDashboardComponent', () => {
     beforeEach(() => {
       repoDetail = getRepoDetail();
       spyOn(service, 'getRepo').and.returnValue(new Observable(observer => observer.next(repoDetail)));
+      spyOn(service, 'getPullRequest');
       component.ngOnChanges({
         owner: new SimpleChange('', 'angular'),
         repo: new SimpleChange('', 'angular')
@@ -51,6 +52,10 @@ describe('PoorEnemyDashboardComponent', () => {
 
     it('should set repoDetail when get repo detail success', () => {
       expect(component.repoDetail).toEqual(repoDetail);
+    });
+
+    it('should get pull request count after receive repo detail', () => {
+      expect(service.getPullRequest).toHaveBeenCalledWith('angular/angular');
     });
 
   });
@@ -72,6 +77,7 @@ describe('PoorEnemyDashboardComponent', () => {
   function getRepoDetail(): RepoDetail {
     return new RepoDetail({
       name: 'angular',
+      full_name: 'angular/angular',
       description: 'One framework. Mobile & desktop.',
       stargazers_count: 21676,
       forks_count: 5568,
