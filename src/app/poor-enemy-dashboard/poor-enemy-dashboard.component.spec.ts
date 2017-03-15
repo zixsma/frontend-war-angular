@@ -3,7 +3,7 @@ import { SimpleChange } from '@angular/core';
 import { PoorEnemyDashboardComponent } from './poor-enemy-dashboard.component';
 import { GithubService, RepoDetail } from '../github-service/github.service';
 import { HttpModule } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
+import { Observable,  } from 'rxjs/Observable';
 
 describe('PoorEnemyDashboardComponent', () => {
   let component: PoorEnemyDashboardComponent;
@@ -33,13 +33,24 @@ describe('PoorEnemyDashboardComponent', () => {
     expect(component.repoDetail).toEqual(new RepoDetail());
   });
 
+  it('should get pull request count after receive repo detail', () => {
+    spyOn(service, 'getRepo').and.returnValue(new Observable(observer => observer.error(new Error())));
+    spyOn(service, 'getPullRequest');
+    component.ngOnChanges({
+      owner: new SimpleChange('', 'angular'),
+      repo: new SimpleChange('', 'angular')
+    });
+
+    expect(service.getPullRequest).not.toHaveBeenCalled();
+  });
+
   describe('owner and repo input change', () => {
     let repoDetail: RepoDetail;
 
     beforeEach(() => {
       repoDetail = getRepoDetail();
       spyOn(service, 'getRepo').and.returnValue(new Observable(observer => observer.next(repoDetail)));
-      spyOn(service, 'getPullRequest');
+      spyOn(service, 'getPullRequest').and.returnValue(new Observable(observer => observer.next(200)));
       component.ngOnChanges({
         owner: new SimpleChange('', 'angular'),
         repo: new SimpleChange('', 'angular')
@@ -56,6 +67,10 @@ describe('PoorEnemyDashboardComponent', () => {
 
     it('should get pull request count after receive repo detail', () => {
       expect(service.getPullRequest).toHaveBeenCalledWith('angular/angular');
+    });
+
+    it('should set pullRequestCount when get pull request count success', () => {
+      expect(component.pullRequestCount).toEqual(200);
     });
 
   });
