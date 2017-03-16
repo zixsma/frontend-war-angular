@@ -1,8 +1,6 @@
 import { Component, OnInit, OnChanges, SimpleChanges, Input } from '@angular/core';
 import { GithubService, RepoDetail } from '../github-service/github.service';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs';
-
+import { Observable } from 'rxjs/Rx';
 
 @Component({
   selector: 'poor-enemy-dashboard',

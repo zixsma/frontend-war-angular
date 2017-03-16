@@ -38,8 +38,8 @@ describe('PoorEnemyDashboardComponent', () => {
 
     beforeEach(() => {
       repoDetail = getRepoDetail();
-      spyOn(service, 'getRepo').and.returnValue(new Observable(observer => {observer.next(repoDetail); observer.complete();}));
-      spyOn(service, 'getPullRequest').and.returnValue(new Observable(observer => {observer.next(200); observer.complete();}));
+      spyOn(service, 'getRepo').and.returnValue(new Observable(observer => { observer.next(repoDetail); observer.complete(); }));
+      spyOn(service, 'getPullRequest').and.returnValue(new Observable(observer => { observer.next(200); observer.complete(); }));
       component.ngOnChanges({
         owner: new SimpleChange('', 'angular'),
         repo: new SimpleChange('', 'angular')
@@ -54,7 +54,7 @@ describe('PoorEnemyDashboardComponent', () => {
       expect(component.repoDetail).toEqual(repoDetail);
     });
 
-    it('should get pull request count after receive repo detail', () => {
+    it('should get pull request count from github service', () => {
       expect(service.getPullRequest).toHaveBeenCalledWith('angular/angular');
     });
 
