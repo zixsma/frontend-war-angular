@@ -12,11 +12,11 @@ describe('DashboardComponent', () => {
   let service: GithubService;
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DashboardComponent, PoorEnemyDashboardComponent ],
-      providers: [ GithubService ],
-      imports: [ HttpModule ]
+      declarations: [DashboardComponent, PoorEnemyDashboardComponent],
+      providers: [GithubService],
+      imports: [HttpModule]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -35,10 +35,11 @@ describe('DashboardComponent', () => {
 
   describe('on init', () => {
     let repoDetail: RepoDetail;
-    
+
     beforeEach(() => {
       repoDetail = getRepoDetail();
-      spyOn(service, 'getRepo').and.returnValue(new Observable(observer => observer.next(repoDetail)));
+      spyOn(service, 'getRepo').and.returnValue(new Observable(observer => { observer.next(repoDetail); observer.complete(); }));
+      spyOn(service, 'getPullRequest').and.returnValue(new Observable(observer => { observer.next(200); observer.complete(); }));
       component.ngOnInit();
     });
 
@@ -48,6 +49,14 @@ describe('DashboardComponent', () => {
 
     it('should set repoDetail when get repo detail success', () => {
       expect(component.repoDetail).toEqual(repoDetail);
+    });
+
+    it('should get pull request count from github service', () => {
+      expect(service.getPullRequest).toHaveBeenCalledWith('angular/angular');
+    });
+
+    it('should set pullRequestCount when get pull request count success', () => {
+      expect(component.pullRequestCount).toEqual(200);
     });
 
   });
