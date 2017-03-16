@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { StargazersComponent } from './stargazers/stargazers.component';
 
 const routes: Routes = [
-  {
-    path: '', component: DashboardComponent
-  }
+  { path: '', component: DashboardComponent, pathMatch: 'full' },
+  { path: ':owner/:repo/stargazers', component: StargazersComponent }
 ];
 
 @NgModule({

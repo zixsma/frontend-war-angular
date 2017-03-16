@@ -8,12 +8,14 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PoorEnemyDashboardComponent } from './poor-enemy-dashboard/poor-enemy-dashboard.component';
 import { GithubService } from './github-service/github.service';
+import { StargazersComponent } from './stargazers/stargazers.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    PoorEnemyDashboardComponent
+    PoorEnemyDashboardComponent,
+    StargazersComponent
   ],
   imports: [
     BrowserModule,
