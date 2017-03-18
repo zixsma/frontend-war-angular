@@ -5,7 +5,7 @@
     <div class="col-3" *ngFor="let stargazer of stargazers">
       <img class="img-fluid" [src]="stargazer" />
     </div>
-    <div class="col-12">
+    <div [hidden]="loading" class="col-12">
       <div class="mx-auto loader"></div>
     </div>
   </div>

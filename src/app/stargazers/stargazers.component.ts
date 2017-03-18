@@ -4,8 +4,7 @@ import { GithubService, RepoDetail } from '../github-service/github.service';
 
 @Component({
   selector: 'stargazers',
-  templateUrl: './stargazers.component.html',
-  styleUrls: ['./stargazers.component.scss']
+  templateUrl: './stargazers.component.html'
 })
 export class StargazersComponent implements OnInit {
   stargazers: string[] = [];
@@ -40,7 +39,8 @@ export class StargazersComponent implements OnInit {
   private loadStargazers(page: number) {
     this.loading = true;
     this.githubService.getStargazers(this.owner, this.repo, page)
-      .finally(() => { this.loading = false }).subscribe(stargazers => {
+      .finally(() => { this.loading = false })
+      .subscribe(stargazers => {
         this.stargazers = this.stargazers.concat(stargazers)
         this.page += 1;
       });
