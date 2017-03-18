@@ -11,10 +11,6 @@ class MockActivatedRoute extends ActivatedRoute {
   params = Observable.of({owner: 'angular', repo: 'angular'});
 }
 
-class MockHttp extends Http {
-
-}
-
 describe('StargazersComponent', () => {
   let component: StargazersComponent;
   let activatedRoute: MockActivatedRoute;
@@ -43,5 +39,12 @@ describe('StargazersComponent', () => {
     spyOn(service, 'getStargazers');
     component.ngOnInit();
     expect(service.getStargazers).not.toHaveBeenCalled();
+  });
+
+  it('should getStargazers with owner facebook and repo react when init', () => {
+    activatedRoute.params = Observable.of({owner: 'facebook', repo: 'react'});
+    spyOn(service, 'getStargazers');
+    component.ngOnInit();
+    expect(service.getStargazers).toHaveBeenCalledWith('facebook', 'react', 1);
   });
 });
