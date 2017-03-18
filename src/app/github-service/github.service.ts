@@ -23,7 +23,7 @@ export class GithubService {
   }
 
   getStargazers(owner: string, repo: string, page: number): Observable<string[]> {
-    return this.http.get(`https://api.github.com/repos/${owner}/${repo}/stargazers?page=${page}&per_page=10`)
+    return this.http.get(`https://api.github.com/repos/${owner}/${repo}/stargazers?page=${page}&per_page=30`)
       .map(stargazers => stargazers.json().map(stargazer => stargazer.avatar_url));
   }
 

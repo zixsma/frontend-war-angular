@@ -4,8 +4,8 @@
     jQuery JavaScript Library
   </p>
   <div class="row stargazers">
-    <div class="col-3">
-      <img class="img-fluid" src="profile.jpg" />
+    <div class="col-3" *ngFor="let stargazer of stargazers">
+      <img class="img-fluid" [src]="stargazer" />
     </div>
   </div>
 </div>
