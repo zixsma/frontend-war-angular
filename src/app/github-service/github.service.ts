@@ -13,12 +13,14 @@ export class GithubService {
   }
 
   getRepo(owner: string, repoName: string) {
-    return this.http.get(`https://api.github.com/repos/${owner}/${repoName}`, { headers: GithubService.header })
+    return this.http
+      .get(`https://api.github.com/repos/${owner}/${repoName}`, { headers: GithubService.header })
       .map(response => new RepoDetail(response.json()));
   }
 
   getPullRequest(fullRepoName: string): Observable<number> {
-    return this.http.get(`https://api.github.com/search/issues?q=+type:pr+repo:${fullRepoName}&sort=created&‌​order=asc`, { headers: GithubService.header })
+    return this.http
+      .get(`https://api.github.com/search/issues?q=+type:pr+repo:${fullRepoName}&sort=created&‌​order=asc`, { headers: GithubService.header })
       .map(prCount => prCount.json().total_count);
   }
 
