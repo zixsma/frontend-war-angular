@@ -1,8 +1,6 @@
 <div class="container">
-  <h1>jQuery</h1>
-  <p>
-    jQuery JavaScript Library
-  </p>
+  <h1>{{repoDetail.name}}</h1>
+  <p>{{repoDetail.description}}</p>
   <div class="row stargazers">
     <div class="col-3" *ngFor="let stargazer of stargazers">
       <img class="img-fluid" [src]="stargazer" />
