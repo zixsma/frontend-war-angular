@@ -22,8 +22,9 @@ export class GithubService {
       .map(prCount => prCount.json().total_count);
   }
 
-  getStargazers(owner: string, repo: string, page: number): void {
-    this.http.get(`https://api.github.com/repos/${owner}/${repo}/stargazers?page=${page}&per_page=10`);
+  getStargazers(owner: string, repo: string, page: number): Observable<string[]> {
+    return this.http.get(`https://api.github.com/repos/${owner}/${repo}/stargazers?page=${page}&per_page=10`)
+      .map(stargazers => stargazers.json().map(stargazer => stargazer.avatar_url));
   }
 
 }

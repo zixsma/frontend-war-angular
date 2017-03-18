@@ -125,13 +125,22 @@ describe('GithubService', () => {
       service.getStargazers('facebook', 'react', 2);
     }));
 
+    it('should return stargazer image list when stargazers success', () => {
+      service.getStargazers('angular', 'angular', 1).subscribe(stargazers => {
+        expect(stargazers).toEqual([
+          'https://avatars1.githubusercontent.com/u/463703?v=3',
+          'https://avatars1.githubusercontent.com/u/644172?v=3'
+        ]);
+      });
+    });
+
     function getJsonStargazers() {
       return [
         {
-          avatar_url: "https://avatars1.githubusercontent.com/u/463703?v=3"
+          avatar_url: 'https://avatars1.githubusercontent.com/u/463703?v=3'
         },
         {
-          avatar_url: "https://avatars1.githubusercontent.com/u/644172?v=3"
+          avatar_url: 'https://avatars1.githubusercontent.com/u/644172?v=3'
         }
       ];
     }
