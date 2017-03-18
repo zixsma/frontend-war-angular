@@ -19,5 +19,14 @@ before_install:
 
 before_script:
 - ng build -prod
+- cp ./dist/index.html ./dist/404.html
 
 script: ng test --single-run
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN # Set in travis-ci.org dashboard
+  on:
+    branch: master
+  local_dir: dist
