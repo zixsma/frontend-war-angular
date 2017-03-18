@@ -4,6 +4,8 @@ import { PoorEnemyDashboardComponent } from './poor-enemy-dashboard.component';
 import { GithubService, RepoDetail } from '../github-service/github.service';
 import { HttpModule } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { RouterModule } from '@angular/router';
+import { APP_BASE_HREF } from '@angular/common';
 
 describe('PoorEnemyDashboardComponent', () => {
   let component: PoorEnemyDashboardComponent;
@@ -13,8 +15,8 @@ describe('PoorEnemyDashboardComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [PoorEnemyDashboardComponent],
-      providers: [GithubService],
-      imports: [HttpModule]
+      providers: [GithubService, { provide: APP_BASE_HREF, useValue: "/" }],
+      imports: [HttpModule, RouterModule.forRoot([])]
     })
       .compileComponents();
   }));
