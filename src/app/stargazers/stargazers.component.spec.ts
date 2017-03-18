@@ -67,6 +67,16 @@ describe('StargazersComponent', () => {
     expect(service.getStargazers).not.toHaveBeenCalled();
   });
 
+  it('should append stargazers when get stargazers page 2 success', () => {
+    component.stargazers = ['fake string of stargazer 1'];
+    spyOn(service, 'getStargazers').and.returnValue(Observable.of(['fake string of stargazer 2']));
+    component.onWindowScroll(getWindowEvent(400, 700));
+    expect(component.stargazers).toEqual([
+      'fake string of stargazer 1',
+      'fake string of stargazer 2'
+    ]);
+  });
+
   function getWindowEvent(scrollY: number, offsetHeight: number) {
     return {
       currentTarget: {

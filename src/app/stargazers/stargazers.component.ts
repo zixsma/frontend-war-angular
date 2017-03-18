@@ -33,7 +33,7 @@ export class StargazersComponent implements OnInit {
 
   private loadStargazers(page: number) {
     this.githubService.getStargazers(this.owner, this.repo, page)
-      .subscribe(stargazers => this.stargazers = this.stargazers = stargazers);
+      .subscribe(stargazers => this.stargazers = this.stargazers.concat(stargazers));
   }
 
 }
