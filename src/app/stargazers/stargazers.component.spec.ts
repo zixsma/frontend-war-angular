@@ -57,8 +57,9 @@ describe('StargazersComponent', () => {
 
   it('should get stargazers page 2 when scroll to bottom of page', () => {
     spyOn(service, 'getStargazers').and.returnValue(Observable.of(['fake string of stargazer 2']));
+    component.ngOnInit();
     component.onWindowScroll(getWindowEvent(600, 700));
-    expect(service.getStargazers).toHaveBeenCalledWith(undefined, undefined, 2);
+    expect(service.getStargazers).toHaveBeenCalledWith('angular', 'angular', 2);
   });
 
   it('should get stargazers page 2 when scroll to bottom of page', () => {
@@ -75,6 +76,14 @@ describe('StargazersComponent', () => {
       'fake string of stargazer 1',
       'fake string of stargazer 2'
     ]);
+  });
+
+  it('should get stargazers page 3 when scroll to bottom of page 2', () => {
+    spyOn(service, 'getStargazers').and.returnValue(Observable.of(['fake string of stargazer']));
+    component.ngOnInit();
+    component.onWindowScroll(getWindowEvent(600, 700));
+    component.onWindowScroll(getWindowEvent(900, 1000));
+    expect(service.getStargazers).toHaveBeenCalledWith('angular', 'angular', 3);
   });
 
   function getWindowEvent(scrollY: number, offsetHeight: number) {

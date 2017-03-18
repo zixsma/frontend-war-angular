@@ -11,6 +11,7 @@ export class StargazersComponent implements OnInit {
   stargazers: string[] = [];
   private owner: string;
   private repo: string;
+  private page: number;
 
   constructor(private activatedRoute: ActivatedRoute, private githubService: GithubService) { }
 
@@ -18,7 +19,8 @@ export class StargazersComponent implements OnInit {
     this.activatedRoute.params.subscribe(({ owner, repo }) => {
       this.owner = owner;
       this.repo = repo;
-      this.loadStargazers(1);
+      this.page = 1;
+      this.loadStargazers(this.page);
     });
   }
 
@@ -27,13 +29,16 @@ export class StargazersComponent implements OnInit {
     let window = event.currentTarget;
     let document = event.target;
     if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight)) {
-      this.loadStargazers(2);
+      this.loadStargazers(this.page);
     }
   }
 
   private loadStargazers(page: number) {
     this.githubService.getStargazers(this.owner, this.repo, page)
-      .subscribe(stargazers => this.stargazers = this.stargazers.concat(stargazers));
+      .subscribe(stargazers => {
+        this.stargazers = this.stargazers.concat(stargazers)
+        this.page += 1;
+      });
   }
 
 }
