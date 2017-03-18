@@ -23,7 +23,7 @@ export class GithubService {
   }
 
   getStargazers(owner: string, repo: string, page: number): void {
-    this.http.get('https://api.github.com/repos/angular/angular/stargazers?page=1&per_page=10');
+    this.http.get(`https://api.github.com/repos/${owner}/${repo}/stargazers?page=${page}&per_page=10`);
   }
 
 }

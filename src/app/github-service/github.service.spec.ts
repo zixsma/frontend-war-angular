@@ -116,6 +116,15 @@ describe('GithubService', () => {
       service.getStargazers('angular', 'angular', 1);
     }));
 
+    it('should call get stargazers api with owner facebook, repo react, page size 10 and page 2', async(() => {
+      mockBackend.connections.subscribe((connection) => {
+        expect(connection.request.url).toEqual('https://api.github.com/repos/facebook/react/stargazers?page=2&per_page=10');
+        expect(connection.request.method).toEqual(RequestMethod.Get);
+      });
+
+      service.getStargazers('facebook', 'react', 2);
+    }));
+
     function getJsonStargazers() {
       return [
         {
