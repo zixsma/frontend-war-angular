@@ -9,7 +9,7 @@ import { GithubService, RepoDetail } from '../github-service/github.service';
 })
 export class StargazersComponent implements OnInit {
   stargazers: string[] = [];
-  repoDetail: RepoDetail;
+  repoDetail = new RepoDetail();
   loading: boolean;
   private owner: string;
   private repo: string;

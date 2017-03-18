@@ -105,6 +105,10 @@ describe('StargazersComponent', () => {
     component.loading = true;
   });
 
+  it('should initial new repoDetail property', () => {
+    expect(component.repoDetail).toEqual(new RepoDetail());
+  });
+
   describe('get repo detail', () => {
     let repoDetail: RepoDetail;
     beforeEach(() => {
