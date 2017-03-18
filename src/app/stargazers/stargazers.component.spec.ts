@@ -111,6 +111,12 @@ describe('StargazersComponent', () => {
     component.loading = true;
   });
 
+  it('should get repo detail with owner angular and repo angular when init', () => {
+    spyOn(service, 'getRepo');
+    component.ngOnInit();
+    expect(service.getRepo).toHaveBeenCalledWith('angular', 'angular');
+  });
+
   function getWindowEvent(scrollY: number, offsetHeight: number) {
     return {
       currentTarget: {
