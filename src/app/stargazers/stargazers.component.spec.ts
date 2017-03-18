@@ -59,16 +59,6 @@ describe('StargazersComponent', () => {
       expect(component.stargazers).toEqual(['fake string of stargazer']);
     });
 
-    it('should set stargazers page 2 when getStargazers success', () => {
-      component.ngOnInit();
-      expect(component.owner).toEqual('angular');
-    });
-
-    it('should set stargazers page 2 when getStargazers success', () => {
-      component.ngOnInit();
-      expect(component.repo).toEqual('angular');
-    });
-
   });
 
 });

@@ -9,8 +9,8 @@ import { GithubService } from '../github-service/github.service';
 })
 export class StargazersComponent implements OnInit {
   stargazers: string[] = [];
-  owner: string;
-  repo: string;
+  private owner: string;
+  private repo: string;
 
   constructor(private activatedRoute: ActivatedRoute, private githubService: GithubService) { }
 
@@ -19,13 +19,13 @@ export class StargazersComponent implements OnInit {
       this.owner = owner;
       this.repo = repo;
       if (owner && repo) {
-        this.loadStargazers(owner, repo, 1);
+        this.loadStargazers(1);
       }
     });
   }
 
-  private loadStargazers(owner: string, repo: string, page: number) {
-    this.githubService.getStargazers(owner, repo, 1)
+  private loadStargazers(page: number) {
+    this.githubService.getStargazers(this.owner, this.repo, 1)
       .subscribe(stargazers => this.stargazers = this.stargazers = stargazers);
   }
 
