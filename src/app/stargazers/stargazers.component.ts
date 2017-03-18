@@ -8,6 +8,7 @@ import { GithubService } from '../github-service/github.service';
   styleUrls: ['./stargazers.component.scss']
 })
 export class StargazersComponent implements OnInit {
+  stargazers: string[] = [];
 
   constructor(private activatedRoute: ActivatedRoute, private githubService: GithubService) { }
 

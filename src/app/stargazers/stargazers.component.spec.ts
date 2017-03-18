@@ -47,4 +47,8 @@ describe('StargazersComponent', () => {
     component.ngOnInit();
     expect(service.getStargazers).toHaveBeenCalledWith('facebook', 'react', 1);
   });
+
+  it('should getStargazers with owner facebook and repo react when init', () => {
+    expect(component.stargazers).toEqual([]);
+  });
 });
