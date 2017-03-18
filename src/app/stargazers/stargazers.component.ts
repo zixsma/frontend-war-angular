@@ -1,6 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { GithubService } from '../github-service/github.service';
+import { GithubService, RepoDetail } from '../github-service/github.service';
 
 @Component({
   selector: 'stargazers',
@@ -9,6 +9,7 @@ import { GithubService } from '../github-service/github.service';
 })
 export class StargazersComponent implements OnInit {
   stargazers: string[] = [];
+  repoDetail: RepoDetail;
   loading: boolean;
   private owner: string;
   private repo: string;
@@ -22,7 +23,7 @@ export class StargazersComponent implements OnInit {
       this.repo = repo;
       this.page = 1;
       this.loadStargazers(this.page);
-      this.githubService.getRepo(owner, repo);
+      this.githubService.getRepo(owner, repo).subscribe(repoDetail => this.repoDetail = repoDetail);
     });
   }
 

@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { StargazersComponent } from './stargazers.component';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { GithubService } from '../github-service/github.service';
+import { GithubService, RepoDetail } from '../github-service/github.service';
 import { Http, BaseRequestOptions } from '@angular/http';
 import { MockBackend } from '@angular/http/testing';
 
@@ -105,17 +105,27 @@ describe('StargazersComponent', () => {
     component.loading = true;
   });
 
-  it('should get repo detail with owner angular and repo angular when init', () => {
-    spyOn(service, 'getRepo');
-    component.ngOnInit();
-    expect(service.getRepo).toHaveBeenCalledWith('angular', 'angular');
-  });
+  describe('get repo detail', () => {
+    let repoDetail: RepoDetail;
+    beforeEach(() => {
+      repoDetail = new RepoDetail({ name: 'angular' });
+      spyOn(service, 'getRepo').and.returnValue(Observable.of(repoDetail));
+    });
+    it('should get with owner angular and repo angular when init', () => {
+      component.ngOnInit();
+      expect(service.getRepo).toHaveBeenCalledWith('angular', 'angular');
+    });
 
-  it('should get repo detail with owner facebook and repo react when init', () => {
-    activatedRoute.params = Observable.of({ owner: 'facebook', repo: 'react' });
-    spyOn(service, 'getRepo');
-    component.ngOnInit();
-    expect(service.getRepo).toHaveBeenCalledWith('facebook', 'react');
+    it('should get with owner facebook and repo react when init', () => {
+      activatedRoute.params = Observable.of({ owner: 'facebook', repo: 'react' });
+      component.ngOnInit();
+      expect(service.getRepo).toHaveBeenCalledWith('facebook', 'react');
+    });
+
+    it('should set repo detail when get repo detail success', () => {
+      component.ngOnInit();
+      expect(component.repoDetail).toEqual(repoDetail);
+    });
   });
 
   function getWindowEvent(scrollY: number, offsetHeight: number) {
