@@ -4,32 +4,29 @@ import { Observable } from 'rxjs/Rx';
 
 @Component({
   selector: 'poor-enemy-dashboard',
-  templateUrl: './poor-enemy-dashboard.component.html',
-  styleUrls: ['./poor-enemy-dashboard.component.scss']
+  templateUrl: './poor-enemy-dashboard.component.html'
 })
-export class PoorEnemyDashboardComponent implements OnInit, OnChanges {
+export class PoorEnemyDashboardComponent implements OnChanges {
   @Input() owner: string;
   @Input() repo: string;
   repoDetail = new RepoDetail();
   pullRequestCount: number;
+
   constructor(private githubService: GithubService) { }
 
-  ngOnInit() {
-  }
-
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['owner'] && changes['repo']) {
-      let owner = changes['owner'].currentValue;
-      let repo = changes['repo'].currentValue;
+    if (!changes['owner'] || !changes['repo']) { return; }
 
-      Observable.forkJoin(
-        this.githubService.getRepo(owner, repo),
-        this.githubService.getPullRequest(`${owner}/${repo}`)
-      ).subscribe(([repoDetail, prCount]: [RepoDetail, number]) => {
-        this.repoDetail = repoDetail;
-        this.pullRequestCount = prCount;
-      });
-    }
+    let owner = changes['owner'].currentValue;
+    let repo = changes['repo'].currentValue;
+
+    Observable.forkJoin(
+      this.githubService.getRepo(owner, repo),
+      this.githubService.getPullRequest(`${owner}/${repo}`)
+    ).subscribe(([repoDetail, prCount]: [RepoDetail, number]) => {
+      this.repoDetail = repoDetail;
+      this.pullRequestCount = prCount;
+    });
   }
 
 }
