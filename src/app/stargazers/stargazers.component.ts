@@ -12,8 +12,11 @@ export class StargazersComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute, private githubService: GithubService) { }
 
   ngOnInit() {
-    this.activatedRoute.params.subscribe();
-    this.githubService.getStargazers('angular', 'angular', 1);
+    this.activatedRoute.params.subscribe(params => {
+      if (params['owner'] && params['repo']) {
+        this.githubService.getStargazers('angular', 'angular', 1)
+      }
+    });
   }
 
 }

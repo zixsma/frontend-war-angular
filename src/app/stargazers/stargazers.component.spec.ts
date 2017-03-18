@@ -37,4 +37,11 @@ describe('StargazersComponent', () => {
     component.ngOnInit();
     expect(service.getStargazers).toHaveBeenCalledWith('angular', 'angular', 1);
   });
+
+  it('should not getStargazers when init and has no owner and repo route params', () => {
+    activatedRoute.params = Observable.of({});
+    spyOn(service, 'getStargazers');
+    component.ngOnInit();
+    expect(service.getStargazers).not.toHaveBeenCalled();
+  });
 });
