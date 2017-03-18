@@ -18,9 +18,7 @@ export class StargazersComponent implements OnInit {
     this.activatedRoute.params.subscribe(({ owner, repo }) => {
       this.owner = owner;
       this.repo = repo;
-      if (owner && repo) {
-        this.loadStargazers(1);
-      }
+      this.loadStargazers(1);
     });
   }
 

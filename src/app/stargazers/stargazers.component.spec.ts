@@ -42,12 +42,6 @@ describe('StargazersComponent', () => {
       expect(service.getStargazers).toHaveBeenCalledWith('angular', 'angular', 1);
     });
 
-    it('should not getStargazers when init and has no owner and repo route params', () => {
-      activatedRoute.params = Observable.of({});
-      component.ngOnInit();
-      expect(service.getStargazers).not.toHaveBeenCalled();
-    });
-
     it('should getStargazers with owner facebook and repo react when init', () => {
       activatedRoute.params = Observable.of({ owner: 'facebook', repo: 'react' });
       component.ngOnInit();
