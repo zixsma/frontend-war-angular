@@ -22,8 +22,8 @@ export class StargazersComponent implements OnInit {
       this.repo = repo;
       this.page = 1;
       this.loadStargazers(this.page);
+      this.githubService.getRepo(owner, repo);
     });
-    this.githubService.getRepo('angular', 'angular');
   }
 
   @HostListener("window:scroll", ['$event'])

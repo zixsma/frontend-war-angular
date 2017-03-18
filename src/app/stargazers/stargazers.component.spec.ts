@@ -117,6 +117,13 @@ describe('StargazersComponent', () => {
     expect(service.getRepo).toHaveBeenCalledWith('angular', 'angular');
   });
 
+  it('should get repo detail with owner facebook and repo react when init', () => {
+    activatedRoute.params = Observable.of({ owner: 'facebook', repo: 'react' });
+    spyOn(service, 'getRepo');
+    component.ngOnInit();
+    expect(service.getRepo).toHaveBeenCalledWith('facebook', 'react');
+  });
+
   function getWindowEvent(scrollY: number, offsetHeight: number) {
     return {
       currentTarget: {
