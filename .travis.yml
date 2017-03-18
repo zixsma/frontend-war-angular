@@ -30,3 +30,5 @@ deploy:
   on:
     branch: master
   local_dir: dist
+  repo: zixsma.github.io
+  target_branch: master
