@@ -22,4 +22,8 @@ export class GithubService {
       .map(prCount => prCount.json().total_count);
   }
 
+  getStargazers(owner: string, repo: string, page: number): void {
+    this.http.get('https://api.github.com/repos/angular/angular/stargazers?page=1&per_page=10');
+  }
+
 }

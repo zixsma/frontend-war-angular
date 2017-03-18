@@ -1,4 +1,4 @@
-import { TestBed, inject } from '@angular/core/testing';
+import { TestBed, inject, async } from '@angular/core/testing';
 
 import { GithubService, RepoDetail } from './github.service';
 import { Http, BaseRequestOptions, Response, ResponseOptions, RequestMethod, Headers } from '@angular/http';
@@ -95,6 +95,36 @@ describe('GithubService', () => {
 
     function getJsonPullRequest() {
       return { total_count: 5706 };
+    }
+  });
+
+  describe('get pull request', () => {
+    beforeEach(() => {
+      mockBackend.connections.subscribe((connection) => {
+        connection.mockRespond(new Response(new ResponseOptions({
+          body: JSON.stringify(getJsonStargazers())
+        })));
+      });
+    });
+
+    it('should call get stargazers api with owner angular, repo angular, page size 10 and page 1', async(() => {
+      mockBackend.connections.subscribe((connection) => {
+        expect(connection.request.url).toEqual('https://api.github.com/repos/angular/angular/stargazers?page=1&per_page=10');
+        expect(connection.request.method).toEqual(RequestMethod.Get);
+      });
+
+      service.getStargazers('angular', 'angular', 1);
+    }));
+
+    function getJsonStargazers() {
+      return [
+        {
+          avatar_url: "https://avatars1.githubusercontent.com/u/463703?v=3"
+        },
+        {
+          avatar_url: "https://avatars1.githubusercontent.com/u/644172?v=3"
+        }
+      ];
     }
   });
 });
