@@ -55,4 +55,20 @@ describe('StargazersComponent', () => {
 
   });
 
+  describe('scroll', () => {
+    it('should get stargazers page 2 when scroll to 200px before bottom of page', () => {
+      spyOn(service, 'getStargazers').and.returnValue(Observable.of(['fake string of stargazer 2']));
+      component.onWindowScroll({
+        currentTarget: {
+          innerHeight: 100,
+          scrollY: 400
+        },
+        body: {
+          offsetHeight: 700
+        }
+      });
+      expect(service.getStargazers).toHaveBeenCalledWith(undefined, undefined, 2);
+    });
+  });
+
 });

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GithubService } from '../github-service/github.service';
 
@@ -22,8 +22,13 @@ export class StargazersComponent implements OnInit {
     });
   }
 
+  @HostListener("window:scroll", ['$event'])
+  onWindowScroll(event) {
+    this.loadStargazers(2);
+  }
+
   private loadStargazers(page: number) {
-    this.githubService.getStargazers(this.owner, this.repo, 1)
+    this.githubService.getStargazers(this.owner, this.repo, page)
       .subscribe(stargazers => this.stargazers = this.stargazers = stargazers);
   }
 
