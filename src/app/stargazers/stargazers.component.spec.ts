@@ -87,6 +87,7 @@ describe('StargazersComponent', () => {
       component.ngOnInit();
       component.onWindowScroll(getWindowEvent(600, 700));
       component.onWindowScroll(getWindowEvent(900, 1000));
+
       expect(service.getStargazers).toHaveBeenCalledWith('angular', 'angular', 3);
     });
   });
@@ -95,18 +96,24 @@ describe('StargazersComponent', () => {
     it('should set loading to true', () => {
       spyOn(service, 'getStargazers').and.returnValue(Observable.of(['fake string of stargazer']));
       component.loading = false;
+      
       component.onWindowScroll(getWindowEvent(600, 700));
+
       component.loading = true;
     });
 
     it('should set loading to false when finish', () => {
-      spyOn(service, 'getStargazers').and.returnValue(new Observable(observer => { observer.next(['fake string of stargazer']); observer.complete(); }));
+      spyOn(service, 'getStargazers').and.returnValue(new Observable(observer => {
+        observer.next(['fake string of stargazer']); observer.complete();
+      }));
       component.onWindowScroll(getWindowEvent(600, 700));
       component.loading = false;
     });
 
     it('should set loading to true when have not finished yet', () => {
-      spyOn(service, 'getStargazers').and.returnValue(new Observable(observer => { observer.next(['fake string of stargazer']); }));
+      spyOn(service, 'getStargazers').and.returnValue(new Observable(observer => {
+        observer.next(['fake string of stargazer']);
+      }));
       component.onWindowScroll(getWindowEvent(600, 700));
       component.loading = true;
     });
