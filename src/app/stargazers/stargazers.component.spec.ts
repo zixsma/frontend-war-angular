@@ -34,7 +34,7 @@ describe('StargazersComponent', () => {
 
   describe('getStargazers', () => {
     beforeEach(() => {
-      spyOn(service, 'getStargazers').and.returnValue(Observable.of(['fake string of stargazer 1']));
+      spyOn(service, 'getStargazers').and.returnValue(Observable.of(['fake string of stargazer']));
     });
 
     it('should getStargazers with owner angular and repo angular when init', () => {
@@ -54,9 +54,19 @@ describe('StargazersComponent', () => {
       expect(service.getStargazers).toHaveBeenCalledWith('facebook', 'react', 1);
     });
 
-    it('should set stargazers when getStargazers success', () => {
+    it('should set stargazers page 1 when getStargazers success', () => {
       component.ngOnInit();
-      expect(component.stargazers).toEqual(['fake string of stargazer 1']);
+      expect(component.stargazers).toEqual(['fake string of stargazer']);
+    });
+
+    it('should set stargazers page 2 when getStargazers success', () => {
+      component.ngOnInit();
+      expect(component.owner).toEqual('angular');
+    });
+
+    it('should set stargazers page 2 when getStargazers success', () => {
+      component.ngOnInit();
+      expect(component.repo).toEqual('angular');
     });
 
   });
