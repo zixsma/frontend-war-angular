@@ -9,6 +9,7 @@ import { GithubService } from '../github-service/github.service';
 })
 export class StargazersComponent implements OnInit {
   stargazers: string[] = [];
+  loading: boolean;
   private owner: string;
   private repo: string;
   private page: number;
@@ -28,14 +29,16 @@ export class StargazersComponent implements OnInit {
   onWindowScroll(event) {
     let window = event.currentTarget;
     let document = event.target;
+    if (this.loading) { return; }
     if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight)) {
       this.loadStargazers(this.page);
     }
   }
 
   private loadStargazers(page: number) {
+    this.loading = true;
     this.githubService.getStargazers(this.owner, this.repo, page)
-      .subscribe(stargazers => {
+      .finally(() => { this.loading = false }).subscribe(stargazers => {
         this.stargazers = this.stargazers.concat(stargazers)
         this.page += 1;
       });
