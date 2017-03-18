@@ -48,12 +48,6 @@ describe('StargazersComponent', () => {
       expect(service.getStargazers).toHaveBeenCalledWith('facebook', 'react', 1);
     });
 
-    it('should not getStargazers when activatedRoute not return params', () => {
-      activatedRoute.params = Observable.of();
-      component.ngOnInit();
-      expect(service.getStargazers).not.toHaveBeenCalled();
-    });
-
     it('should set stargazers page 1 when getStargazers success', () => {
       component.ngOnInit();
       expect(component.stargazers).toEqual(['fake string of stargazer']);
