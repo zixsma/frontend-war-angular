@@ -55,22 +55,22 @@ describe('StargazersComponent', () => {
 
   });
 
-  it('should get stargazers page 2 when scroll to 200px before bottom of page', () => {
+  it('should get stargazers page 2 when scroll to bottom of page', () => {
     spyOn(service, 'getStargazers').and.returnValue(Observable.of(['fake string of stargazer 2']));
-    component.onWindowScroll(getWindowEvent(400, 700));
+    component.onWindowScroll(getWindowEvent(600, 700));
     expect(service.getStargazers).toHaveBeenCalledWith(undefined, undefined, 2);
   });
 
-  it('should get stargazers page 2 when scroll to 200px before bottom of page', () => {
+  it('should get stargazers page 2 when scroll to bottom of page', () => {
     spyOn(service, 'getStargazers');
-    component.onWindowScroll(getWindowEvent(399, 700));
+    component.onWindowScroll(getWindowEvent(599, 700));
     expect(service.getStargazers).not.toHaveBeenCalled();
   });
 
   it('should append stargazers when get stargazers page 2 success', () => {
     component.stargazers = ['fake string of stargazer 1'];
     spyOn(service, 'getStargazers').and.returnValue(Observable.of(['fake string of stargazer 2']));
-    component.onWindowScroll(getWindowEvent(400, 700));
+    component.onWindowScroll(getWindowEvent(600, 700));
     expect(component.stargazers).toEqual([
       'fake string of stargazer 1',
       'fake string of stargazer 2'

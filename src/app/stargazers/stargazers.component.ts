@@ -26,7 +26,7 @@ export class StargazersComponent implements OnInit {
   onWindowScroll(event) {
     let window = event.currentTarget;
     let document = event.target;
-    if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 200)) {
+    if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight)) {
       this.loadStargazers(2);
     }
   }
