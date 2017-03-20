@@ -4,6 +4,7 @@ import { GithubService, RepoDetail } from '../github-service/github.service';
 
 @Component({
   selector: 'stargazers',
+  styleUrls: ['./stargazers.component.css'],
   templateUrl: './stargazers.component.html'
 })
 export class StargazersComponent implements OnInit {
