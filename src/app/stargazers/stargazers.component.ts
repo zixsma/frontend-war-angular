@@ -16,7 +16,7 @@ export class StargazersComponent implements OnInit {
   private owner: string;
   private repo: string;
   private page = 1;
-  private per_page = 24;
+  private perPage = 24;
 
   constructor(private activatedRoute: ActivatedRoute, private githubService: GithubService) { }
 
@@ -24,7 +24,7 @@ export class StargazersComponent implements OnInit {
     this.activatedRoute.params.subscribe(({ owner, repo }) => {
       this.owner = owner;
       this.repo = repo;
-      this.loadStargazers(this.page, this.per_page);
+      this.loadStargazers(this.page, this.perPage);
       this.githubService.getRepo(owner, repo).subscribe(repoDetail => this.repoDetail = repoDetail);
     });
   }
@@ -35,13 +35,13 @@ export class StargazersComponent implements OnInit {
     let document = event.target;
     if (this.loading) { return; }
     if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight)) {
-      this.loadStargazers(this.page, this.per_page);
+      this.loadStargazers(this.page, this.perPage);
     }
   }
 
-  private loadStargazers(page: number, per_page: number) {
+  private loadStargazers(page: number, perPage: number) {
     this.loading = true;
-    this.githubService.getStargazers(this.owner, this.repo, page, per_page)
+    this.githubService.getStargazers(this.owner, this.repo, page, perPage)
       .finally(() => { this.loading = false })
       .subscribe(stargazers => {
         this.stargazers = this.stargazers.concat(stargazers)
