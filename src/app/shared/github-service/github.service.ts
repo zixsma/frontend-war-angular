@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
-import { RepoDetail } from './repo-detail';
+import { RepoDetail } from '../repo-detail';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
-export { RepoDetail } from './repo-detail';
+export { RepoDetail } from '../repo-detail';
 
 @Injectable()
 export class GithubService {
@@ -24,8 +24,8 @@ export class GithubService {
       .map(prCount => prCount.json().total_count);
   }
 
-  getStargazers(owner: string, repo: string, page: number): Observable<string[]> {
-    return this.http.get(`https://api.github.com/repos/${owner}/${repo}/stargazers?page=${page}&per_page=30`)
+  getStargazers(owner: string, repo: string, page: number, perPage = 30): Observable<string[]> {
+    return this.http.get(`https://api.github.com/repos/${owner}/${repo}/stargazers?page=${page}&per_page=${perPage}`)
       .map(stargazers => stargazers.json().map(stargazer => stargazer.avatar_url));
   }
 

@@ -1,9 +1,12 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { GithubService, RepoDetail } from '../github-service/github.service';
+import { GithubService, RepoDetail } from '../shared/github-service/github.service';
+import { SlideInUpAnimation } from '../shared/animations';
 
 @Component({
   selector: 'stargazers',
+  animations: [SlideInUpAnimation],
+  styleUrls: ['./stargazers.component.css'],
   templateUrl: './stargazers.component.html'
 })
 export class StargazersComponent implements OnInit {
@@ -12,7 +15,8 @@ export class StargazersComponent implements OnInit {
   loading: boolean;
   private owner: string;
   private repo: string;
-  private page: number;
+  private page = 1;
+  private perPage = 24;
 
   constructor(private activatedRoute: ActivatedRoute, private githubService: GithubService) { }
 
@@ -20,8 +24,7 @@ export class StargazersComponent implements OnInit {
     this.activatedRoute.params.subscribe(({ owner, repo }) => {
       this.owner = owner;
       this.repo = repo;
-      this.page = 1;
-      this.loadStargazers(this.page);
+      this.loadStargazers(this.page, this.perPage);
       this.githubService.getRepo(owner, repo).subscribe(repoDetail => this.repoDetail = repoDetail);
     });
   }
@@ -32,17 +35,17 @@ export class StargazersComponent implements OnInit {
     let document = event.target;
     if (this.loading) { return; }
     if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight)) {
-      this.loadStargazers(this.page);
+      this.loadStargazers(this.page, this.perPage);
     }
   }
 
-  private loadStargazers(page: number) {
+  private loadStargazers(page: number, perPage: number) {
     this.loading = true;
-    this.githubService.getStargazers(this.owner, this.repo, page)
+    this.githubService.getStargazers(this.owner, this.repo, page, perPage)
       .finally(() => { this.loading = false })
       .subscribe(stargazers => {
         this.stargazers = this.stargazers.concat(stargazers)
-        this.page += 1;
+        this.page++;
       });
   }
 

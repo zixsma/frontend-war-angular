@@ -1,0 +1,11 @@
+.stargazer {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* make component content align with navbar-brand */
+@media (max-width: 576px) {
+  :host {
+    text-align: center;
+  }
+}

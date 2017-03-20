@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 import { SimpleChange } from '@angular/core';
 import { PoorEnemyDashboardComponent } from './poor-enemy-dashboard.component';
-import { GithubService, RepoDetail } from '../github-service/github.service';
+import { GithubService, RepoDetail } from '../shared/github-service/github.service';
 import { HttpModule } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { RouterModule } from '@angular/router';
