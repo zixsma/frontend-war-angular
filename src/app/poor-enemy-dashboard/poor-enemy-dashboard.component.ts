@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, SimpleChanges, Input } from '@angular/core';
+import { Component, OnChanges, SimpleChanges, Input } from '@angular/core';
 import { GithubService, RepoDetail } from '../shared/github-service/github.service';
 import { Observable } from 'rxjs/Rx';
 
