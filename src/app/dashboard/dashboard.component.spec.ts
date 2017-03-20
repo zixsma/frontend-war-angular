@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DashboardComponent } from './dashboard.component';
 import { PoorEnemyDashboardComponent } from '../poor-enemy-dashboard/poor-enemy-dashboard.component';
-import { GithubService, RepoDetail } from '../github-service/github.service';
+import { GithubService, RepoDetail } from '../shared/github-service/github.service';
 import { Observable } from 'rxjs/Observable';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';

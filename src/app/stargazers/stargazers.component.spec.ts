@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { StargazersComponent } from './stargazers.component';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { GithubService, RepoDetail } from '../github-service/github.service';
+import { GithubService, RepoDetail } from '../shared/github-service/github.service';
 import { Http, BaseRequestOptions } from '@angular/http';
 import { MockBackend } from '@angular/http/testing';
 
@@ -43,13 +43,13 @@ describe('StargazersComponent', () => {
 
     it('should getStargazers with owner angular and repo angular when init', () => {
       component.ngOnInit();
-      expect(service.getStargazers).toHaveBeenCalledWith('angular', 'angular', 1);
+      expect(service.getStargazers).toHaveBeenCalledWith('angular', 'angular', 1, 24);
     });
 
     it('should getStargazers with owner facebook and repo react when init', () => {
       activatedRoute.params = Observable.of({ owner: 'facebook', repo: 'react' });
       component.ngOnInit();
-      expect(service.getStargazers).toHaveBeenCalledWith('facebook', 'react', 1);
+      expect(service.getStargazers).toHaveBeenCalledWith('facebook', 'react', 1, 24);
     });
 
     it('should set stargazers page 1 when getStargazers success', () => {
@@ -66,7 +66,7 @@ describe('StargazersComponent', () => {
     it('should get stargazers page 2', () => {
       component.ngOnInit();
       component.onWindowScroll(getWindowEvent(600, 700));
-      expect(service.getStargazers).toHaveBeenCalledWith('angular', 'angular', 2);
+      expect(service.getStargazers).toHaveBeenCalledWith('angular', 'angular', 2, 24);
     });
 
     it('should get stargazers page 2', () => {
@@ -88,7 +88,7 @@ describe('StargazersComponent', () => {
       component.onWindowScroll(getWindowEvent(600, 700));
       component.onWindowScroll(getWindowEvent(900, 1000));
 
-      expect(service.getStargazers).toHaveBeenCalledWith('angular', 'angular', 3);
+      expect(service.getStargazers).toHaveBeenCalledWith('angular', 'angular', 3, 24);
     });
   });
 
@@ -96,7 +96,7 @@ describe('StargazersComponent', () => {
     it('should set loading to true', () => {
       spyOn(service, 'getStargazers').and.returnValue(Observable.of(['fake string of stargazer']));
       component.loading = false;
-      
+
       component.onWindowScroll(getWindowEvent(600, 700));
 
       component.loading = true;

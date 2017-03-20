@@ -7,7 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PoorEnemyDashboardComponent } from './poor-enemy-dashboard/poor-enemy-dashboard.component';
-import { GithubService } from './github-service/github.service';
+import { GithubService } from './shared/github-service/github.service';
 import { StargazersComponent } from './stargazers/stargazers.component';
 
 @NgModule({

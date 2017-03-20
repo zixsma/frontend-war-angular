@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GithubService, RepoDetail } from '../github-service/github.service';
+import { GithubService, RepoDetail } from '../shared/github-service/github.service';
 import { Observable } from 'rxjs/Rx'
 
 @Component({

@@ -1,9 +1,11 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { GithubService, RepoDetail } from '../github-service/github.service';
+import { GithubService, RepoDetail } from '../shared/github-service/github.service';
+import { SlideInUpAnimation } from '../shared/animations';
 
 @Component({
   selector: 'stargazers',
+  animations: [SlideInUpAnimation],
   styleUrls: ['./stargazers.component.css'],
   templateUrl: './stargazers.component.html'
 })

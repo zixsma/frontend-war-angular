@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
-import { RepoDetail } from './repo-detail';
+import { RepoDetail } from '../repo-detail';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
-export { RepoDetail } from './repo-detail';
+export { RepoDetail } from '../repo-detail';
 
 @Injectable()
 export class GithubService {
