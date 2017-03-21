@@ -18,7 +18,7 @@ before_install:
   - sh -e /etc/init.d/xvfb start
 
 before_script:
-- ng build -prod --baseHref /frontend-war-angular/
+- ng build -prod --aot --baseHref /frontend-war-angular/
 - cp ./dist/index.html ./dist/404.html
 
 script: ng test --single-run
