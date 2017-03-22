@@ -3,3 +3,7 @@
   margin-bottom: 20px;
 }
 
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
