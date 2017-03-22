@@ -2,7 +2,7 @@
   <h1 class="capitalize">{{repoDetail.name}}</h1>
   <p>{{repoDetail.description}}</p>
   <div class="row">
-    <div class="stargazer col s6 m3 align-self-center" *ngFor="let stargazer of stargazers" [@slideInUp]="'in'">
+    <div class="stargazer col s6 m3" *ngFor="let stargazer of stargazers" [@slideInUp]="'in'">
       <img class="responsive-img" [src]="stargazer" />
     </div>
     <div class="col s12 center-align">
