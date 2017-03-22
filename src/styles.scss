@@ -14,10 +14,25 @@
 
 a {
     cursor: pointer;
+    &.btn {
+        margin-top: 20px;
+    }
 }
 
 body {
     background-color: #f3f3f3;
+}
+
+.blue-facebook { 
+    background-color: rgb(64,88,147) !important;
+}
+
+.green-vue {
+    background-color: rgb(98,181,135) !important;
+}
+
+.red-angular {
+    background-color: rgb(206,62,57) !important;
 }
 
 .loader {

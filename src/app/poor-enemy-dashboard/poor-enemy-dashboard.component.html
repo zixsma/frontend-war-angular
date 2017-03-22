@@ -15,10 +15,8 @@
         <p><strong>Open Issues:</strong> {{repoDetail.openIssuesCount | number}}</p>
         <p><strong>Forks:</strong> {{repoDetail.forksCount | number}}</p>
         <p><strong>Pull Requests:</strong> {{pullRequestCount | number}}</p>
+        <a class="btn {{btnClass}}" [routerLink]="repoDetail.fullName + '/stargazers'">View enemies</a>
       </div>
     </div>
-  </div>
-  <div class="card-action text-muted">
-    <a [routerLink]="repoDetail.fullName + '/stargazers'">View enemies</a>
   </div>
 </div>
