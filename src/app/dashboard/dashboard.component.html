@@ -1,23 +1,35 @@
-<div class="jumbotron">
-  <h1 class="display-5">Welcome to</h1>
-  <h1 class="display-3">Frontend War Room</h1>
-  <p class="lead">Here you can find your allies and enemies</p>
-  <hr class="my-4">
-  <h2>The Greatness Project is <span class="capitalize">{{repoDetail.name}}</span></h2>
-  <p class="lead">{{repoDetail.description}}</p>
-  <p class="card-text">Stars: {{repoDetail.stargazersCount | number}}</p>
-  <p class="card-text">Open Issues: {{repoDetail.openIssuesCount | number}}</p>
-  <p class="card-text">Forks: {{repoDetail.forksCount | number}}</p>
-  <p class="card-text">Pull Requests: {{pullRequestCount | number}}</p>
-  <p class="lead">
-    <a class="btn btn-primary btn-lg" role="button" routerLink="angular/angular/stargazers">View allies</a>
-  </p>
-</div>
+<h2 class="header">Welcome to Frontend War Room</h2>
+<p class="flow-text">Here you can find your allies and enemies</p>
 <div class="row">
-  <div class="col">
+  <div class="col s12">
+    <div class="card hoverable">
+      <div class="card-content">
+        <div class="row">
+          <div class="col s3">
+            <img class="responsive-img" [src]="repoDetail.avatarUrl || ''">
+          </div>
+          <div class="col s9">
+            <h3 class="card-header">The Greatness Project is <span class="capitalize">{{repoDetail.name}}</span></h3>
+            <p class="flow-text">{{repoDetail.description}}</p>
+            <p class="card-text"><strong>Stars:</strong> {{repoDetail.stargazersCount | number}}</p>
+            <p class="card-text"><strong>Open Issues:</strong> {{repoDetail.openIssuesCount | number}}</p>
+            <p class="card-text"><strong>Forks:</strong> {{repoDetail.forksCount | number}}</p>
+            <p class="card-text"><strong>Pull Requests:</strong> {{pullRequestCount | number}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="card-action">
+        <a routerLink="angular/angular/stargazers">View allies</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col m6">
     <poor-enemy-dashboard owner="facebook" repo="react"></poor-enemy-dashboard>
   </div>
-  <div class="col">
+  <div class="col m6">
     <poor-enemy-dashboard owner="vuejs" repo="vue"></poor-enemy-dashboard>
   </div>
 </div>
