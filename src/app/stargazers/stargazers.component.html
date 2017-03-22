@@ -1,10 +1,10 @@
 <h1 class="capitalize">{{repoDetail.name}}</h1>
 <p>{{repoDetail.description}}</p>
 <div class="row">
-  <div class="stargazer col-6 col-sm-3 align-self-center" *ngFor="let stargazer of stargazers" [@slideInUp]="'in'">
+  <div class="stargazer col s3 m6 align-self-center" *ngFor="let stargazer of stargazers" [@slideInUp]="'in'">
     <img class="img-fluid" [src]="stargazer" />
   </div>
-  <div class="col-12">
+  <div class="col s12">
     <div class="mx-auto loader"></div>
   </div>
 </div>
