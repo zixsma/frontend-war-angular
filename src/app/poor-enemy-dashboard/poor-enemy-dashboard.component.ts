@@ -9,6 +9,7 @@ import { Observable } from 'rxjs/Rx';
 export class PoorEnemyDashboardComponent implements OnChanges {
   @Input() owner: string;
   @Input() repo: string;
+  @Input() btnClass: string;
   repoDetail = new RepoDetail();
   pullRequestCount: number;
 

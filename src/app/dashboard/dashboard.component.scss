@@ -1,0 +1,21 @@
+.is-large {
+    height: 560px;
+    padding-top: 32px;
+    text-align: center;
+}
+
+.background-superhero-paper {
+    background: url(https://angular.io/resources/images/backgrounds/super-hero-large.png) no-repeat bottom center,-webkit-linear-gradient(305deg,#0D47A1,#42A5F5);
+    background: url(https://angular.io/resources/images/backgrounds/super-hero-large.png) no-repeat bottom center,linear-gradient(145deg,#0D47A1,#42A5F5);
+    background-blend-mode: multiply;
+    background-size: 100%;
+}
+
+.hero-logo {
+    -webkit-filter: drop-shadow(0 2px 2px rgba(0,0,0,0.24));
+    filter: drop-shadow(0 2px 2px rgba(0,0,0,0.24));
+    margin-bottom: 8px;
+    opacity: 1;
+    padding: 0;
+    width: 240px;
+}
