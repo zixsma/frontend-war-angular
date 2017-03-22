@@ -26,6 +26,7 @@ describe('GithubService', () => {
     it('should call api /repos/facebook/react when owner facebook and repo react', () => {
       let header = new Headers();
       header.append('Accept', 'application/vnd.github.v3+json');
+      header.append('Authorization', 'token fbedabf134e561e8515b0c939d4f7b7b17f749ff');
       mockBackend.connections.subscribe((connection) => {
         expect(connection.request.url).toEqual('https://api.github.com/repos/facebook/react');
         expect(connection.request.method).toEqual(RequestMethod.Get);
@@ -69,6 +70,7 @@ describe('GithubService', () => {
     it('should call api issues with repo full name angular/angular', (done) => {
       let header = new Headers();
       header.append('Accept', 'application/vnd.github.v3+json');
+      header.append('Authorization', 'token fbedabf134e561e8515b0c939d4f7b7b17f749ff');
       mockBackend.connections.subscribe((connection) => {
         expect(connection.request.url).toEqual('https://api.github.com/search/issues?q=+type:pr+repo:angular/angular&sort=created&‌​order=asc');
         expect(connection.request.method).toEqual(RequestMethod.Get);
@@ -108,9 +110,14 @@ describe('GithubService', () => {
     });
 
     it('should call get stargazers api with owner angular, repo angular, page size 30 and page 1', async(() => {
+      let header = new Headers();
+      header.append('Accept', 'application/vnd.github.v3+json');
+      header.append('Authorization', 'token fbedabf134e561e8515b0c939d4f7b7b17f749ff');
+
       mockBackend.connections.subscribe((connection) => {
         expect(connection.request.url).toEqual('https://api.github.com/repos/angular/angular/stargazers?page=1&per_page=30');
         expect(connection.request.method).toEqual(RequestMethod.Get);
+        expect(connection.request.headers.toJSON()).toEqual(header.toJSON());
       });
 
       service.getStargazers('angular', 'angular', 1);

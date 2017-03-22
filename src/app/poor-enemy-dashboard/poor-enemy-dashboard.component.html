@@ -1,11 +1,18 @@
-<div class="card">
+<div class="card hoverable">
   <div class="card-content">
-    <h3 class="card-header capitalize">{{repoDetail.name}}</h3>
-    <p class="card-text">{{repoDetail.description}}</p>
-    <p class="card-text">Stars: {{repoDetail.stargazersCount | number}}</p>
-    <p class="card-text">Open Issues: {{repoDetail.openIssuesCount | number}}</p>
-    <p class="card-text">Forks: {{repoDetail.forksCount | number}}</p>
-    <p class="card-text">Pull Requests: {{pullRequestCount | number}}</p>
+    <div class="row">
+      <div class="col s3">
+        <img class="responsive-img" [src]="repoDetail.avatarUrl || ''">
+      </div>
+      <div class="col s9">
+        <h3 class="card-header capitalize">{{repoDetail.name}}</h3>
+        <p>{{repoDetail.description}}</p>
+        <p><strong>Stars:</strong> {{repoDetail.stargazersCount | number}}</p>
+        <p><strong>Open Issues:</strong> {{repoDetail.openIssuesCount | number}}</p>
+        <p><strong>Forks:</strong> {{repoDetail.forksCount | number}}</p>
+        <p><strong>Pull Requests:</strong> {{pullRequestCount | number}}</p>
+      </div>
+    </div>
   </div>
   <div class="card-action text-muted">
     <a [routerLink]="repoDetail.fullName + '/stargazers'">View enemies</a>
